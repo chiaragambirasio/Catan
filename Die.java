@@ -3,6 +3,7 @@ amount: 2
 numbers: 1-6
 */
 import java.util.Random;
+import java.util.Arrays;
 
 public class Die {
 
@@ -36,15 +37,31 @@ public class Die {
 
     public static int[] test(){
 
-        int [] resultarray = new int [12];
+        int [] resultarray = new int [4];
 
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < 4; i++) {
 
             int result = throwNDice(2);
             resultarray[i] = result;
 
         }
         return resultarray;
+    }
+
+    public static double median(int[] arr){
+
+        Arrays.sort(arr);
+        int length = arr.length;
+        double median;
+        int middleindex = length / 2;
+
+        if (length % 2 == 0) {
+            median = ((double)arr[middleindex] + (double)arr[middleindex-1]) / 2;
+        } else {
+            median = arr[middleindex];
+        }
+        return median;
+
     }
 
     public static double mean(int[] arr){
@@ -65,7 +82,7 @@ public class Die {
     public static void main(String[] args) {
 
 
-        int sum = throwNDice(getRandomNumberUsingNextInt(0,120));
+        int sum = throwNDice(getRandomNumberUsingNextInt(0,40));
 
 
         int[] results = test();
@@ -75,7 +92,10 @@ public class Die {
         }
 
         double mean = mean(results);
-        System.out.println("\nAverage:" + mean);
+        System.out.println("\nMean:" + mean);
+
+        double median = median(results);
+        System.out.println("Median" + median);
 
     } 
 
