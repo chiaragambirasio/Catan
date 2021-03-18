@@ -17,23 +17,15 @@ public class Die {
     public static int getRandomNumberUsingNextInt(int min, int max){
 
         Random random = new Random();
-        return random.nextInt(max-min) + min;
-    }
-
-    public static int throwTwoDice(){
-
-        Die die1 = new Die();
-        Die die2 = new Die();
-        int sum = die1.number + die2.number;
-        return sum;
+        return random.nextInt(max - min) + min;
+    
     }
 
     public static int throwNDice(int n){
 
-        System.out.println(n);
         int dicesum = 0;
 
-        for(int i = 0; i <= n; i++){
+        for(int i = 0; i < n; i++){
 
             Die current = new Die();
             dicesum += current.number;
@@ -41,13 +33,50 @@ public class Die {
 
         return dicesum;
     }
+
+    public static int[] test(){
+
+        int [] resultarray = new int [12];
+
+        for (int i = 0; i < 12; i++) {
+
+            int result = throwNDice(2);
+            resultarray[i] = result;
+
+        }
+        return resultarray;
+    }
+
+    public static double mean(int[] arr){
+
+        double sum = 0;
+        double counter = arr.length;
+
+        for(int i = 0; i < arr.length; i++){
+
+            sum += arr[i];
+
+        }
+        
+        double mean = sum / counter;
+        return mean;
+    }
+
     public static void main(String[] args) {
 
-        System.out.println("How many dice?");
 
-        int sum = throwNDice(getRandomNumberUsingNextInt(0,1000));
+        int sum = throwNDice(getRandomNumberUsingNextInt(0,120));
 
-        System.out.println("Your dicesum:" + sum);
+
+        int[] results = test();
+
+        for (int i : results) {
+            System.out.print(i + ", ");
+        }
+
+        double mean = mean(results);
+        System.out.println("\nAverage:" + mean);
+
     } 
 
 }
