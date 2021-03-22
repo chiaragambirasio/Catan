@@ -4,6 +4,7 @@ numbers: 1-6
 */
 import java.util.Random;
 import java.util.Arrays;
+import java.util.*;
 
 public class Die {
 
@@ -37,9 +38,9 @@ public class Die {
 
     public static int[] test(){
 
-        int [] resultarray = new int [4];
+        int [] resultarray = new int [20];
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 20; i++) {
 
             int result = throwNDice(2);
             resultarray[i] = result;
@@ -79,6 +80,39 @@ public class Die {
         return mean;
     }
 
+    public static int mode(int[] arr){
+
+        // Sort the array
+        Arrays.sort(arr);
+
+        //find the frequency using linear traversal
+        int max_count = 0;
+        int mode = arr[0];
+        int curr_count = 1;
+
+        for (int i = 1; i < arr.length; i++){
+
+            if (arr[i] == arr[i - 1]){
+                curr_count++;
+            }else{
+
+                if (curr_count > max_count){
+                    max_count = curr_count;
+                    mode = arr[i-1];
+                }else{
+                    curr_count = 1;
+                }
+            }
+        }
+
+        if (curr_count > max_count){
+            max_count = curr_count;
+            mode = arr[arr.length -1];
+        }
+
+        return mode;
+    }
+
     public static void main(String[] args) {
 
 
@@ -87,6 +121,7 @@ public class Die {
 
         int[] results = test();
 
+        System.out.println(results);
         for (int i : results) {
             System.out.print(i + ", ");
         }
@@ -97,6 +132,8 @@ public class Die {
         double median = median(results);
         System.out.println("Median" + median);
 
+        int mode = mode(results);
+        System.out.println("Mode:" + mode);
     } 
 
 }
